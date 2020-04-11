@@ -9,8 +9,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var core:Core
+    @State var setUp = false
     var body: some View {
-        Text("Hello, World!")
+        VStack{
+            
+            if (core.isSetUp ?? false){
+                
+                VStack {
+                    Text("App Home Page")
+                    Text("Welcome")
+                    Text("Email: \(core.profile?.email ?? "")")
+                    
+                }
+            }else{
+                VStack {
+                    FirstPage()
+                    
+                }
+            }
+        }.onAppear{self.core.listen()}
     }
 }
 
